@@ -1,0 +1,55 @@
+%!PS
+
+% Special function characters
+/al -1 def  /ll -2 def  /ml -3 def  /pl -4 def
+/as -5 def  /ps -6 def
+
+% Character maps for each state
+/charmaps [
+  %  A    L    M    P  
+  [ (A)  (a)  (0)  (;) ]  % 0
+  [ (B)  (b)  (1)  (<) ]  % 1
+  [ (C)  (c)  (2)  (>) ]  % 2
+  [ (D)  (d)  (3)  (@) ]  % 3
+  [ (E)  (e)  (4)  ([) ]  % 4
+  [ (F)  (f)  (5)   92 ]  % 5
+  [ (G)  (g)  (6)  (]) ]  % 6
+  [ (H)  (h)  (7)  (_) ]  % 7
+  [ (I)  (i)  (8)  (`) ]  % 8  
+  [ (J)  (j)  (9)  (~) ]  % 9
+  [ (K)  (k)  (&)  (!) ]  % 10
+  [ (L)  (l)   13   13 ]  % 11
+  [ (M)  (m)    9    9 ]  % 12
+  [ (N)  (n)  (,)  (,) ]  % 13
+  [ (O)  (o)  (:)  (:) ]  % 14
+  [ (P)  (p)  (#)   10 ]  % 15
+  [ (Q)  (q)  (-)  (-) ]  % 16
+  [ (R)  (r)  (.)  (.) ]  % 17
+  [ (S)  (s)  ($)  ($) ]  % 18
+  [ (T)  (t)  (/)  (/) ]  % 19
+  [ (U)  (u)  (+)  (") ]  % 20
+  [ (V)  (v)  (%)  (|) ]  % 21
+  [ (W)  (w)  (*)  (*) ]  % 22
+  [ (X)  (x)  (=)   40 ]  % 23
+  [ (Y)  (y)  (^)   41 ]  % 24
+  [ (Z)  (z)   pl  (?) ]  % 25
+  [ ( )  ( )  ( )  ({) ]  % 26
+  [  ll   as   ll  (}) ]  % 27
+  [  ml   ml   al  (') ]  % 28
+  [  ps   ps   ps   al ]  % 29
+] def 
+
+% Invert charmaps to give character to value maps for each state
+/charvals [ 30 dict 30 dict 30 dict 30 dict ] def
+0 1 charmaps length 1 sub {
+  /i exch def
+  /encs charmaps i get def
+  0 1 3 {
+    /j exch def
+    encs j get dup type /stringtype eq {0 get} if  % convert string to ASCII if required
+    charvals j get exch i put 
+  } for
+} for
+
+asdf
+
